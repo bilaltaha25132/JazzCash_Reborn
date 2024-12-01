@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-class ScanPage extends StatelessWidget {
+class ScanPage extends StatefulWidget {
   const ScanPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final controller = MobileScannerController(detectionSpeed: DetectionSpeed.noDuplicates);
+  State<ScanPage> createState() => _ScanPageState();
+}
 
+class _ScanPageState extends State<ScanPage> {
+  final MobileScannerController controller = MobileScannerController(detectionSpeed: DetectionSpeed.noDuplicates);
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
@@ -18,21 +23,28 @@ class ScanPage extends StatelessWidget {
               final String? rawValue = barcode.rawValue;
 
               if (rawValue != null) {
-                // Navigate to the display page with QR code data
+                // Pause scanning when a QR code is detected
+                controller.stop();
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => QrCodeResultPage(qrData: rawValue),
+                    builder: (context) => QrCodeResultPage(
+                      qrData: rawValue,
+                      onReturn: () {
+                        // Restart scanning when returning to this page
+                        controller.start();
+                      },
+                    ),
                   ),
                 );
               }
             },
           ),
           Positioned.fill(
-              child: CustomPaint(
-                painter: BorderPainter(),
-              ),
+            child: CustomPaint(
+              painter: BorderPainter(),
+            ),
           ),
-        ]
+        ],
       ),
     );
   }
@@ -72,8 +84,9 @@ class BorderPainter extends CustomPainter {
 
 class QrCodeResultPage extends StatelessWidget {
   final String qrData;
+  final VoidCallback onReturn;
 
-  const QrCodeResultPage({super.key, required this.qrData});
+  const QrCodeResultPage({super.key, required this.qrData, required this.onReturn});
 
   @override
   Widget build(BuildContext context) {
@@ -103,13 +116,14 @@ class QrCodeResultPage extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
+                onReturn(); // Restart scanning
                 Navigator.of(context).pop(); // Return to the scanner page
               },
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 backgroundColor: const Color(0xFF800000),
               ),
-              child: const Text("Scan Another QR Code", style: TextStyle(color: Colors.white),),
+              child: const Text("Scan Another QR Code", style: TextStyle(color: Colors.white)),
             ),
           ],
         ),
