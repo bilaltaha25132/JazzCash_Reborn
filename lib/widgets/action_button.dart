@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_tts/flutter_tts.dart'; // Import flutter_tts package
+import '../pages/mobile_packages.dart';
+import '../pages/mobile_recharge_page.dart';
 import '../pages/morepage.dart'; // Import the MorePage
 import '../pages/bank_list_page.dart'; // Import the BankListPage
-import '../pages/mobile_recharge_page.dart'; // Import the MobileRechargePage
 
 class ActionButtons extends StatelessWidget {
   const ActionButtons({super.key});
@@ -24,7 +26,8 @@ class ActionButtons extends StatelessWidget {
           children: [
             ActionButton(
               icon: Icons.account_balance,
-              label: 'Bank Transfer', // Bank Transfer Button
+              label: 'Bank Transfer',
+              ttsText: 'Bank Transfer', // English
               onPressed: () {
                 Navigator.push(
                   context,
@@ -33,8 +36,9 @@ class ActionButtons extends StatelessWidget {
               },
             ),
             ActionButton(
-              icon: Icons.phone_android, // Icon for "Recharge"
-              label: 'Recharge', // Updated label from "Transfer" to "Recharge"
+              icon: Icons.phone_android,
+              label: 'Recharge',
+              ttsText: 'Recharge', // English
               onPressed: () {
                 Navigator.push(
                   context,
@@ -44,17 +48,22 @@ class ActionButtons extends StatelessWidget {
               },
             ),
             ActionButton(
-              icon: Icons.attach_money,
-              label: 'Withdraw',
+              icon: FontAwesomeIcons.box,
+              label: 'Packages',
+              ttsText: 'Packages', // English
               onPressed: () {
-                // Implement Withdraw functionality if needed
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MobilePackagesPage()),
+                );
               },
             ),
             ActionButton(
               icon: Icons.apps_sharp,
               label: 'More',
+              ttsText: 'More', // English
               onPressed: () {
-                // Navigate to the MorePage
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MorePage()),
@@ -73,23 +82,38 @@ class ActionButton extends StatelessWidget {
     super.key,
     required this.icon,
     required this.label,
+    required this.ttsText, // Text for TTS
     this.onPressed,
   });
 
   final IconData icon;
   final String label;
+  final String ttsText; // Text to speak
   final void Function()? onPressed;
+
+  // Initialize FlutterTts
+  void _speakText() async {
+    FlutterTts flutterTts = FlutterTts();
+    await flutterTts.setLanguage("en-US"); // Set language to English
+    await flutterTts.setSpeechRate(0.5); // Optional: Adjust speech rate
+    await flutterTts.speak(ttsText); // Speak the text
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        IconButton.outlined(
-          onPressed: onPressed,
+        IconButton(
+          onPressed: () {
+            _speakText(); // Speak the label in English
+            if (onPressed != null) {
+              onPressed!(); // Execute the button's action
+            }
+          },
           icon: Icon(
             icon,
-            color: Colors.black, // App's teal color
+            color: Colors.black,
           ),
         ),
         const SizedBox(height: 8),

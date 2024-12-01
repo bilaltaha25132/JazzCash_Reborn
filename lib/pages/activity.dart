@@ -15,10 +15,7 @@ class ActivityPage extends StatelessWidget {
         backgroundColor: const Color(0xFF800000),
         title: const Text(
           "Activity",
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-              color: Colors.white
-          ),
+          style: TextStyle(fontWeight: FontWeight.w500, color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(
@@ -142,8 +139,8 @@ class ActivityPage extends StatelessWidget {
                                     if (index >= 0 && index < tiles.length) {
                                       return Text(
                                         tiles[index],
-                                        style:
-                                            const TextStyle(color: Colors.black),
+                                        style: const TextStyle(
+                                            color: Colors.black),
                                       );
                                     }
                                     return const Text("");
@@ -231,8 +228,10 @@ class ActivityPage extends StatelessWidget {
                     subtitle: Text("ui8.net"),
                     trailing: Text(
                       "-\Rs.45.99",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          color: Colors.red),
                     ),
                   ),
                 ),

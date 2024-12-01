@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart'; // Import flutter_tts package
 
 class MobileRechargePage extends StatefulWidget {
   const MobileRechargePage({super.key});
@@ -9,6 +10,29 @@ class MobileRechargePage extends StatefulWidget {
 
 class _MobileRechargePageState extends State<MobileRechargePage> {
   String selectedOperator = "Jazz";
+  late FlutterTts flutterTts; // Initialize FlutterTts
+
+  @override
+  void initState() {
+    super.initState();
+    flutterTts = FlutterTts();
+    _initializeTts();
+  }
+
+  @override
+  void dispose() {
+    flutterTts.stop(); // Stop TTS when the widget is disposed
+    super.dispose();
+  }
+
+  void _initializeTts() async {
+    await flutterTts.setLanguage("en-US"); // Set language to English
+    await flutterTts.setSpeechRate(0.5); // Adjust speech rate (optional)
+  }
+
+  Future<void> _speakOperator(String operatorName) async {
+    await flutterTts.speak(operatorName); // Speak the operator name
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,14 +82,23 @@ class _MobileRechargePageState extends State<MobileRechargePage> {
                         setState(() {
                           selectedOperator = operator["name"] as String;
                         });
+                        _speakOperator(selectedOperator); // Speak operator name
                       },
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 300),
                         margin: const EdgeInsets.symmetric(horizontal: 8),
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: selectedOperator == operator["name"]
+                              ? const Color(0xFF800000).withOpacity(0.2)
+                              : Colors.white,
                           borderRadius: BorderRadius.circular(15),
+                          border: Border.all(
+                            color: selectedOperator == operator["name"]
+                                ? const Color(0xFF800000)
+                                : Colors.grey.shade300,
+                            width: 2,
+                          ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.1),
@@ -89,8 +122,10 @@ class _MobileRechargePageState extends State<MobileRechargePage> {
                             Text(
                               operator["name"] as String,
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.black,
+                              style: TextStyle(
+                                color: selectedOperator == operator["name"]
+                                    ? const Color(0xFF800000)
+                                    : Colors.black,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12,
                               ),
@@ -168,8 +203,7 @@ class _MobileRechargePageState extends State<MobileRechargePage> {
                         // Add contacts functionality
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                        const Color(0xFF800000), // Teal
+                        backgroundColor: const Color(0xFF800000), // Teal
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -188,11 +222,12 @@ class _MobileRechargePageState extends State<MobileRechargePage> {
               // Proceed Button
               ElevatedButton(
                 onPressed: () {
+                  // Speak the selected operator before proceeding
+                  _speakOperator("Proceeding with $selectedOperator Recharge");
                   // Proceed to Recharge functionality
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                  const Color(0xFF800000), // Teal
+                  backgroundColor: const Color(0xFF800000), // Teal
                   minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
