@@ -24,8 +24,7 @@ class _MobileRechargePageState extends State<MobileRechargePage> {
       appBar: AppBar(
         title: const Text("Mobile Recharge"),
         centerTitle: true,
-        backgroundColor:
-            const Color.fromARGB(255, 16, 80, 98), // Match app's teal color
+        backgroundColor: const Color(0xFF800000), // Match app's teal color
         foregroundColor: Colors.white,
         elevation: 1,
       ),
@@ -65,9 +64,7 @@ class _MobileRechargePageState extends State<MobileRechargePage> {
                         margin: const EdgeInsets.symmetric(horizontal: 8),
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: selectedOperator == operator["name"]
-                              ? const Color.fromARGB(255, 16, 80, 98)
-                              : Colors.white,
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
                           boxShadow: [
                             BoxShadow(
@@ -92,10 +89,8 @@ class _MobileRechargePageState extends State<MobileRechargePage> {
                             Text(
                               operator["name"] as String,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: selectedOperator == operator["name"]
-                                    ? Colors.white
-                                    : Colors.black87,
+                              style: const TextStyle(
+                                color: Colors.black,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12,
                               ),
@@ -174,7 +169,7 @@ class _MobileRechargePageState extends State<MobileRechargePage> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            const Color.fromARGB(255, 16, 80, 98), // Teal
+                        const Color(0xFF800000), // Teal
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -197,7 +192,7 @@ class _MobileRechargePageState extends State<MobileRechargePage> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
-                      const Color.fromARGB(255, 16, 80, 98), // Teal
+                  const Color(0xFF800000), // Teal
                   minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
