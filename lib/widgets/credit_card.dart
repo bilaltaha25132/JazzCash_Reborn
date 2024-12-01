@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CreditCard extends StatelessWidget {
-  const CreditCard({super.key});
+  final bool isUrdu; // Language toggle (English/Urdu)
+
+  const CreditCard({super.key, required this.isUrdu});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,6 @@ class CreditCard extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Container(
-                  // color:  const Color.fromARGB(255, 29, 29, 29),
                   color: Colors.grey[900],
                   child: Stack(
                     children: [
@@ -46,15 +47,15 @@ class CreditCard extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                      const Positioned(
+                      Positioned(
                         bottom: 5,
                         left: 16,
                         child: Text(
-                          "Muhammad Bilal Taha",
-                          style: TextStyle(
+                          isUrdu ? "محمد بلال طحہ" : "Muhammad Bilal Taha",
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
-                            fontWeight: FontWeight.bold
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -71,12 +72,12 @@ class CreditCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                       const Text(
-                          '\Rs. 10,250.00',
-                          style: TextStyle(
+                        Text(
+                          isUrdu ? 'روپے۔ 10,250.00' : '\Rs. 10,250.00',
+                          style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white
+                            color: Colors.white,
                           ),
                         ),
                         Row(
@@ -92,14 +93,14 @@ class CreditCard extends StatelessWidget {
                                 radius: 15,
                                 backgroundColor: Colors.orange.withOpacity(0.8),
                               ),
-                            )
+                            ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ));

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  final bool isUrdu; // Language toggle state
+
+  const ProfilePage({super.key, required this.isUrdu});
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +12,9 @@ class ProfilePage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: const Color(0xFF800000),
         elevation: 0,
-        title: const Text(
-          "Profile",
-          style: TextStyle(
+        title: Text(
+          isUrdu ? "پروفائل" : "Profile",
+          style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
@@ -30,18 +31,18 @@ class ProfilePage extends StatelessWidget {
               backgroundImage: AssetImage('assets/img.png'),
             ),
             const SizedBox(height: 10),
-            const Text(
-              "Muhammad Bilal Taha",
-              style: TextStyle(
+            Text(
+              isUrdu ? "محمد بلال طہ" : "Muhammad Bilal Taha",
+              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const Text(
+            Text(
               "bilaltaha@gmail.com",
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.black,
+                color: isUrdu ? Colors.grey[700] : Colors.black,
               ),
             ),
             const SizedBox(height: 20),
@@ -65,13 +66,13 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   profileDetail(
                     context,
-                    title: "Total Balance",
+                    title: isUrdu ? "کل بیلنس" : "Total Balance",
                     value: "\Rs.12,300.00",
                     icon: Icons.account_balance_wallet_outlined,
                   ),
                   profileDetail(
                     context,
-                    title: "Transactions",
+                    title: isUrdu ? "لین دین" : "Transactions",
                     value: "123",
                     icon: Icons.swap_horiz_outlined,
                   ),
@@ -80,45 +81,46 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             // Profile Options
-            buildSectionHeader("Account Options"),
+            buildSectionHeader(
+                isUrdu ? "اکاؤنٹ کے اختیارات" : "Account Options"),
             const SizedBox(height: 10),
             profileOption(
               context,
               icon: Icons.person_outline,
-              title: "Edit Profile",
+              title: isUrdu ? "پروفائل میں ترمیم کریں" : "Edit Profile",
               onTap: () {},
             ),
             profileOption(
               context,
               icon: Icons.lock_outline,
-              title: "Change Password",
+              title: isUrdu ? "پاس ورڈ تبدیل کریں" : "Change Password",
               onTap: () {},
             ),
             profileOption(
               context,
               icon: Icons.credit_card_outlined,
-              title: "Manage Cards",
+              title: isUrdu ? "کارڈز کو منظم کریں" : "Manage Cards",
               onTap: () {},
             ),
             const SizedBox(height: 20),
-            buildSectionHeader("Settings"),
+            buildSectionHeader(isUrdu ? "ترتیبات" : "Settings"),
             const SizedBox(height: 10),
             profileOption(
               context,
               icon: Icons.notifications_none,
-              title: "Notifications",
+              title: isUrdu ? "اطلاعات" : "Notifications",
               onTap: () {},
             ),
             profileOption(
               context,
               icon: Icons.security_outlined,
-              title: "Privacy & Security",
+              title: isUrdu ? "رازداری اور سیکورٹی" : "Privacy & Security",
               onTap: () {},
             ),
             profileOption(
               context,
               icon: Icons.help_outline,
-              title: "Help & Support",
+              title: isUrdu ? "مدد اور معاونت" : "Help & Support",
               onTap: () {},
             ),
             const SizedBox(height: 20),
@@ -134,9 +136,9 @@ class ProfilePage extends StatelessWidget {
                   ),
                   minimumSize: const Size(double.infinity, 50),
                 ),
-                child: const Text(
-                  "Log Out",
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                child: Text(
+                  isUrdu ? "لاگ آؤٹ" : "Log Out",
+                  style: const TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
             ),

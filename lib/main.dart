@@ -39,32 +39,37 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
   bool isVoiceModeEnabled = false; // Toggle for Voice Mode
+  bool isUrdu = false; // Toggle for Language (English/Urdu)
   final FlutterTts flutterTts = FlutterTts();
-
-  // Define pages for navigation
-  final List<Widget> pages = [
-    const Home(),
-    const MyCardPage(),
-    const ScanPage(),
-    const ActivityPage(),
-    const ProfilePage(),
-  ];
+  late List<Widget> pages;
 
   @override
   void initState() {
     super.initState();
     flutterTts.setSpeechRate(0.6); // Set TTS speed
     flutterTts.setVolume(1.0); // Set TTS volume
-    flutterTts.setLanguage("us-En"); // Set TTS language
+    flutterTts.setLanguage("en-US"); // Set TTS language
+    _initializePages();
+  }
+
+  void _initializePages() {
+    // Initialize the pages based on the current language
+    pages = [
+      Home(isUrdu: isUrdu),
+      const MyCardPage(),
+      const ScanPage(),
+      ActivityPage(isUrdu: isUrdu),
+      ProfilePage(isUrdu: isUrdu),
+    ];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "JazzCash Reborn",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+        title: Text(
+          isUrdu ? "جاز کیش ریبورن" : "JazzCash Reborn",
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
         ),
         centerTitle: true,
         backgroundColor: const Color(0xFF800000),
@@ -81,11 +86,27 @@ class _MainPageState extends State<MainPage> {
                 isVoiceModeEnabled = !isVoiceModeEnabled;
               });
               if (isVoiceModeEnabled) {
-                _speak("Voice mode enabled");
+                _speak(isUrdu ? "وائس موڈ فعال ہے" : "Voice mode enabled");
               } else {
-                _speak("Voice mode disabled");
+                _speak(isUrdu ? "وائس موڈ غیر فعال ہے" : "Voice mode disabled");
               }
             },
+          ),
+          // Language Toggle Button
+          TextButton(
+            onPressed: () {
+              setState(() {
+                isUrdu = !isUrdu; // Toggle language
+                _initializePages(); // Reinitialize pages for language change
+              });
+            },
+            child: Text(
+              isUrdu ? "English" : "اردو",
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ],
       ),
@@ -95,8 +116,8 @@ class _MainPageState extends State<MainPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            tabItem(Icons.home, "Home", 0),
-            tabItem(Icons.credit_card, "My Card", 1),
+            tabItem(Icons.home, isUrdu ? "ہوم" : "Home", 0),
+            tabItem(Icons.credit_card, isUrdu ? "میرا کارڈ" : "My Card", 1),
             FloatingActionButton(
               onPressed: () => onTabTapped(2),
               backgroundColor: Colors.black,
@@ -108,8 +129,8 @@ class _MainPageState extends State<MainPage> {
                 color: Colors.white,
               ),
             ),
-            tabItem(Icons.bar_chart, "Activity", 3),
-            tabItem(Icons.person, "Profile", 4),
+            tabItem(Icons.bar_chart, isUrdu ? "سرگرمی" : "Activity", 3),
+            tabItem(Icons.person, isUrdu ? "پروفائل" : "Profile", 4),
           ],
         ),
       ),
@@ -145,24 +166,24 @@ class _MainPageState extends State<MainPage> {
       currentIndex = index;
     });
     if (isVoiceModeEnabled) {
-      _speak("${getPageLabel(index)}");
+      _speak(getPageLabel(index));
     }
   }
 
   String getPageLabel(int index) {
     switch (index) {
       case 0:
-        return "Home";
+        return isUrdu ? "ہوم" : "Home";
       case 1:
-        return "My Card";
+        return isUrdu ? "میرا کارڈ" : "My Card";
       case 2:
-        return "Scan";
+        return isUrdu ? "اسکین کریں" : "Scan";
       case 3:
-        return "Activity";
+        return isUrdu ? "سرگرمی" : "Activity";
       case 4:
-        return "Profile";
+        return isUrdu ? "پروفائل" : "Profile";
       default:
-        return "Unknown";
+        return isUrdu ? "نامعلوم" : "Unknown";
     }
   }
 

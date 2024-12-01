@@ -1,10 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-
 import '../widgets/time_option_button.dart';
 
 class ActivityPage extends StatelessWidget {
-  const ActivityPage({super.key});
+  final bool isUrdu; // Language toggle state
+
+  const ActivityPage({super.key, required this.isUrdu});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +14,10 @@ class ActivityPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: const Color(0xFF800000),
-        title: const Text(
-          "Activity",
-          style: TextStyle(fontWeight: FontWeight.w500, color: Colors.white),
+        title: Text(
+          isUrdu ? "سرگرمی" : "Activity",
+          style:
+              const TextStyle(fontWeight: FontWeight.w500, color: Colors.white),
         ),
       ),
       body: SingleChildScrollView(
@@ -23,6 +25,7 @@ class ActivityPage extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
+              // Smartpay Cards Section
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -41,17 +44,17 @@ class ActivityPage extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             children: [
-                              const Text(
-                                "Smartpay Cards",
-                                style: TextStyle(
+                              Text(
+                                isUrdu ? "اسمارٹ پے کارڈز" : "Smartpay Cards",
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600),
                               ),
                               const Spacer(),
-                              const Text(
-                                "**** 1990",
-                                style: TextStyle(
+                              Text(
+                                isUrdu ? "**** 1990" : "**** 1990",
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600),
@@ -86,6 +89,7 @@ class ActivityPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 25),
+              // Total Spending Section
               Container(
                 padding: const EdgeInsets.all(12),
                 width: double.maxFinite,
@@ -96,18 +100,18 @@ class ActivityPage extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    const Text(
-                      "Total Spending",
-                      style: TextStyle(
+                    Text(
+                      isUrdu ? "کل اخراجات" : "Total Spending",
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         color: Colors.black,
                       ),
                     ),
                     const SizedBox(height: 4),
-                    const Text(
-                      "\Rs.6,345.00",
-                      style: TextStyle(
+                    Text(
+                      isUrdu ? "\Rs.6,345.00" : "\Rs.6,345.00",
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
@@ -135,10 +139,20 @@ class ActivityPage extends StatelessWidget {
                                       'T',
                                       'F'
                                     ];
+                                    const urduTiles = [
+                                      'اتوار',
+                                      'پیر',
+                                      'منگل',
+                                      'بدھ',
+                                      'جمعرات',
+                                      'جمعہ'
+                                    ];
                                     final index = value.toInt();
                                     if (index >= 0 && index < tiles.length) {
                                       return Text(
-                                        tiles[index],
+                                        isUrdu
+                                            ? urduTiles[index]
+                                            : tiles[index],
                                         style: const TextStyle(
                                             color: Colors.black),
                                       );
@@ -181,12 +195,13 @@ class ActivityPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 25),
-              const Row(
+              // Transactions Section
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Transaction",
-                    style: TextStyle(
+                    isUrdu ? "لین دین" : "Transaction",
+                    style: const TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w700,
                     ),
@@ -194,13 +209,13 @@ class ActivityPage extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "All",
-                        style: TextStyle(
+                        isUrdu ? "سب" : "All",
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      Icon(
+                      const Icon(
                         Icons.keyboard_arrow_down,
                         color: Colors.black,
                       )
@@ -211,8 +226,8 @@ class ActivityPage extends StatelessWidget {
               Column(
                 children: List.generate(
                   3,
-                  (index) => const ListTile(
-                    leading: CircleAvatar(
+                  (index) => ListTile(
+                    leading: const CircleAvatar(
                       backgroundColor: Color.fromARGB(255, 239, 243, 245),
                       child: Icon(
                         Icons.payments_rounded,
@@ -220,15 +235,15 @@ class ActivityPage extends StatelessWidget {
                       ),
                     ),
                     title: Text(
-                      "Smartpay UI Kit",
-                      style: TextStyle(
+                      isUrdu ? "اسمارٹ پے یو آئی کٹ" : "Smartpay UI Kit",
+                      style: const TextStyle(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    subtitle: Text("ui8.net"),
+                    subtitle: Text(isUrdu ? "یو آئی 8 ڈاٹ نیٹ" : "ui8.net"),
                     trailing: Text(
-                      "-\Rs.45.99",
-                      style: TextStyle(
+                      isUrdu ? "-\Rs.45.99" : "-\Rs.45.99",
+                      style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 14,
                           color: Colors.red),

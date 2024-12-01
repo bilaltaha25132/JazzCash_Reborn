@@ -4,7 +4,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../widgets/top_up_sheet.dart';
 
 class TopUpPage extends StatefulWidget {
-  const TopUpPage({super.key});
+  const TopUpPage({super.key, required bool isUrdu});
 
   @override
   State<TopUpPage> createState() => _TopUpPageState();
@@ -107,22 +107,20 @@ class _TopUpPageState extends State<TopUpPage> {
                 showBarModalBottomSheet(
                   context: context,
                   shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20)
-                    )
-                  ),
-                  builder: (context) =>  TopUpBottomSheet(
-                    selectedProvider: selectedProvider,
-                    image: getImageForProvider(selectedProvider),
-                    account:getAccountForProvider(selectedProvider)
-                  ),
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(20))),
+                  builder: (context) => TopUpBottomSheet(
+                      selectedProvider: selectedProvider,
+                      image: getImageForProvider(selectedProvider),
+                      account: getAccountForProvider(selectedProvider)),
                 );
               },
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
                   foregroundColor: Colors.white,
                   fixedSize: const Size(double.maxFinite, 60),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12))),
               child: const Text(
                 "Confirm",
                 style: TextStyle(

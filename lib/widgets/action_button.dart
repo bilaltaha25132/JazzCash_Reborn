@@ -7,7 +7,9 @@ import '../pages/morepage.dart'; // Import the MorePage
 import '../pages/bank_list_page.dart'; // Import the BankListPage
 
 class ActionButtons extends StatelessWidget {
-  const ActionButtons({super.key});
+  final bool isUrdu; // Language toggle (English/Urdu)
+
+  const ActionButtons({super.key, required this.isUrdu});
 
   @override
   Widget build(BuildContext context) {
@@ -26,19 +28,20 @@ class ActionButtons extends StatelessWidget {
           children: [
             ActionButton(
               icon: Icons.account_balance,
-              label: 'Bank Transfer',
-              ttsText: 'Bank Transfer', // English
+              label: isUrdu ? 'بینک ٹرانسفر' : 'Bank Transfer',
+              ttsText: isUrdu ? 'بینک ٹرانسفر' : 'Bank Transfer',
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const BankListPage()),
                 );
               },
+              isUrdu: isUrdu,
             ),
             ActionButton(
               icon: Icons.phone_android,
-              label: 'Recharge',
-              ttsText: 'Recharge', // English
+              label: isUrdu ? 'ریچارج' : 'Recharge',
+              ttsText: isUrdu ? 'ریچارج' : 'Recharge',
               onPressed: () {
                 Navigator.push(
                   context,
@@ -46,11 +49,12 @@ class ActionButtons extends StatelessWidget {
                       builder: (context) => const MobileRechargePage()),
                 );
               },
+              isUrdu: isUrdu,
             ),
             ActionButton(
               icon: FontAwesomeIcons.box,
-              label: 'Packages',
-              ttsText: 'Packages', // English
+              label: isUrdu ? 'پیکجز' : 'Packages',
+              ttsText: isUrdu ? 'پیکجز' : 'Packages',
               onPressed: () {
                 Navigator.push(
                   context,
@@ -58,17 +62,19 @@ class ActionButtons extends StatelessWidget {
                       builder: (context) => const MobilePackagesPage()),
                 );
               },
+              isUrdu: isUrdu,
             ),
             ActionButton(
               icon: Icons.apps_sharp,
-              label: 'More',
-              ttsText: 'More', // English
+              label: isUrdu ? 'مزید' : 'More',
+              ttsText: isUrdu ? 'مزید' : 'More',
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MorePage()),
                 );
               },
+              isUrdu: isUrdu,
             ),
           ],
         ),
@@ -78,23 +84,26 @@ class ActionButtons extends StatelessWidget {
 }
 
 class ActionButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String ttsText;
+  final void Function()? onPressed;
+  final bool isUrdu;
+
   const ActionButton({
     super.key,
     required this.icon,
     required this.label,
-    required this.ttsText, // Text for TTS
+    required this.ttsText,
     this.onPressed,
+    required this.isUrdu,
   });
-
-  final IconData icon;
-  final String label;
-  final String ttsText; // Text to speak
-  final void Function()? onPressed;
 
   // Initialize FlutterTts
   void _speakText() async {
     FlutterTts flutterTts = FlutterTts();
-    await flutterTts.setLanguage("en-US"); // Set language to English
+    await flutterTts
+        .setLanguage(isUrdu ? "ur-PK" : "en-US"); // Set language dynamically
     await flutterTts.setSpeechRate(0.5); // Optional: Adjust speech rate
     await flutterTts.speak(ttsText); // Speak the text
   }
@@ -106,7 +115,7 @@ class ActionButton extends StatelessWidget {
       children: [
         IconButton(
           onPressed: () {
-            _speakText(); // Speak the label in English
+            _speakText(); // Speak the label in the current language
             if (onPressed != null) {
               onPressed!(); // Execute the button's action
             }

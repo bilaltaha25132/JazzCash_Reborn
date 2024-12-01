@@ -5,12 +5,13 @@ import '../widgets/credit_card.dart';
 import '../widgets/transaction_list.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  final bool isUrdu; // Language toggle state
+
+  const Home({super.key, required this.isUrdu});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: const Color.fromARGB(255, 95, 2, 2),
       backgroundColor: const Color(0xFF800000),
       body: SafeArea(
         bottom: false,
@@ -21,16 +22,20 @@ class Home extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Welcome back!",
-                        style: TextStyle(color: Colors.white),
+                        isUrdu ? "خوش آمدید!" : "Welcome back!",
+                        style: const TextStyle(color: Colors.white),
                       ),
                       Text(
-                        "Muhammad Bilal Taha ",
-                        style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                        isUrdu ? "محمد بلال طہ" : "Muhammad Bilal Taha",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -51,22 +56,24 @@ class Home extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 167),
                     color: Colors.white,
-                    child: const Column(
+                    child: Column(
                       children: [
-                        SizedBox(height: 110),
-                        //   ActionButtons
-                        ActionButtons(),
-                        SizedBox(height: 30),
-                        //   TransactionList
-                        TransactionList()
+                        const SizedBox(height: 110),
+                        ActionButtons(
+                            isUrdu: isUrdu), // Pass isUrdu to ActionButtons
+                        const SizedBox(height: 30),
+                        TransactionList(
+                            isUrdu: isUrdu), // Pass isUrdu to TransactionList
                       ],
                     ),
                   ),
-                  const Positioned(
+                  Positioned(
                     top: 20,
                     left: 25,
                     right: 25,
-                    child: CreditCard(),
+                    child: CreditCard(
+                      isUrdu: isUrdu,
+                    ),
                   )
                 ],
               ),
