@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -8,22 +8,16 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        centerTitle: true,
+        backgroundColor: const Color(0xFF800000),
         elevation: 0,
         title: const Text(
           "Profile",
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
-        centerTitle: true,
-        // leading: IconButton(
-        //   icon: const Icon(Icons.arrow_back, color: Colors.black),
-        //   onPressed: () {
-        //     GoRouter.of(context).go('/');
-        //   },
-        // ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -37,17 +31,17 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             const Text(
-              "Anabella Angela",
+              "Muhammad Bilal Taha",
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const Text(
-              "anabella.angela@example.com",
+              "bilaltaha@gmail.com",
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey,
+                color: Colors.black,
               ),
             ),
             const SizedBox(height: 20),
@@ -72,7 +66,7 @@ class ProfilePage extends StatelessWidget {
                   profileDetail(
                     context,
                     title: "Total Balance",
-                    value: "\$12,300.00",
+                    value: "\Rs.12,300.00",
                     icon: Icons.account_balance_wallet_outlined,
                   ),
                   profileDetail(
@@ -134,7 +128,7 @@ class ProfilePage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
+                  backgroundColor: const Color(0xFF800000),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -160,7 +154,7 @@ class ProfilePage extends StatelessWidget {
         CircleAvatar(
           radius: 30,
           backgroundColor: Colors.blueGrey.withOpacity(0.1),
-          child: Icon(icon, color: Colors.blueGrey),
+          child: Icon(icon, color: Colors.black),
         ),
         const SizedBox(height: 10),
         Text(
@@ -174,7 +168,7 @@ class ProfilePage extends StatelessWidget {
           title,
           style: const TextStyle(
             fontSize: 12,
-            color: Colors.grey,
+            color: Colors.black,
           ),
         ),
       ],
@@ -188,7 +182,7 @@ class ProfilePage extends StatelessWidget {
     return ListTile(
       leading: CircleAvatar(
         backgroundColor: Colors.grey[200],
-        child: Icon(icon, color: Colors.blueGrey),
+        child: Icon(icon, color: Colors.black),
       ),
       title: Text(
         title,
@@ -207,7 +201,7 @@ class ProfilePage extends StatelessWidget {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: Colors.black54,
+          color: Colors.black,
         ),
       ),
     );

@@ -12,6 +12,7 @@ class MorePage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -50,10 +51,7 @@ class MorePage extends StatelessWidget {
                   "icon": FontAwesomeIcons.fileInvoice,
                   "label": "Postpaid Bill"
                 },
-                {
-                  "icon": FontAwesomeIcons.box,
-                  "label": "ReadyLoad Mobile Packages"
-                },
+                {"icon": FontAwesomeIcons.box, "label": "Mobile Packages"},
                 {"icon": FontAwesomeIcons.archive, "label": "Mobile Packages"},
               ]),
               buildCategory("Banking & Finance", [
@@ -79,65 +77,6 @@ class MorePage extends StatelessWidget {
                   "label": "Savings Plan"
                 },
               ]),
-              buildCategory("Travel", [
-                {"icon": FontAwesomeIcons.star, "label": "My Favorites"},
-                {"icon": FontAwesomeIcons.car, "label": "Careem Voucher"},
-                {"icon": FontAwesomeIcons.tag, "label": "M-Tag"},
-                {"icon": FontAwesomeIcons.bus, "label": "Zu Peshawar"},
-                {"icon": FontAwesomeIcons.ticketAlt, "label": "Bus Tickets"},
-                {"icon": FontAwesomeIcons.book, "label": "BookMe"},
-              ]),
-              buildCategory("Education", [
-                {"icon": FontAwesomeIcons.school, "label": "School"},
-                {"icon": FontAwesomeIcons.university, "label": "Colleges"},
-                {
-                  "icon": FontAwesomeIcons.chalkboardTeacher,
-                  "label": "Coaching Centers"
-                },
-                {
-                  "icon": FontAwesomeIcons.graduationCap,
-                  "label": "Universities"
-                },
-                {"icon": FontAwesomeIcons.fileAlt, "label": "Entry Tests"},
-                {
-                  "icon": FontAwesomeIcons.clipboard,
-                  "label": "Education Boards"
-                },
-              ]),
-              buildCategory("Marketplace", [
-                {"icon": FontAwesomeIcons.shoppingBag, "label": "Daraz Wallet"},
-                {"icon": FontAwesomeIcons.gift, "label": "E-Vouchers"},
-                {"icon": FontAwesomeIcons.shoppingCart, "label": "Price Oye"},
-              ]),
-              buildCategory("Government Payments", [
-                {"icon": FontAwesomeIcons.landmark, "label": "Govt. Payments"},
-                {"icon": FontAwesomeIcons.carCrash, "label": "Traffic Challan"},
-                {"icon": FontAwesomeIcons.university, "label": "FBR-PRAL"},
-                {"icon": FontAwesomeIcons.passport, "label": "Passport Fee"},
-                {"icon": FontAwesomeIcons.idCard, "label": "Nadra"},
-                {"icon": FontAwesomeIcons.receipt, "label": "PaymIr by KPITB"},
-                {"icon": FontAwesomeIcons.fileInvoice, "label": "Tax Payments"},
-              ]),
-              buildCategory("Other Payments & Services", [
-                {"icon": FontAwesomeIcons.star, "label": "My Favorites"},
-                {"icon": FontAwesomeIcons.ticket, "label": "Online Vouchers"},
-                {
-                  "icon": FontAwesomeIcons.handHoldingUsd,
-                  "label": "Loan Repayment"
-                },
-                {
-                  "icon": FontAwesomeIcons.handHoldingHeart,
-                  "label": "Flood Relief & Donations"
-                },
-                {
-                  "icon": FontAwesomeIcons.handshake,
-                  "label": "Corporate Payments"
-                },
-                {"icon": FontAwesomeIcons.apple, "label": "PomPak"},
-                {"icon": FontAwesomeIcons.tag, "label": "Deals and Discounts"},
-                {"icon": FontAwesomeIcons.city, "label": "PortAll"},
-                {"icon": FontAwesomeIcons.wallet, "label": "JazzCash Khata"},
-              ]),
             ],
           ),
         ),
@@ -154,34 +93,63 @@ class MorePage extends StatelessWidget {
           Text(
             title,
             style: const TextStyle(
-              fontSize: 18,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
+              color: Colors.black87,
             ),
           ),
-          const SizedBox(height: 8),
-          Wrap(
-            spacing: 16,
-            runSpacing: 16,
-            children: items
-                .map(
-                  (item) => Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.grey[200],
-                        child: Icon(item["icon"], color: Colors.black),
+          const SizedBox(height: 12),
+          GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                childAspectRatio: 0.8),
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              final item = items[index];
+              return GestureDetector(
+                onTap: () {
+                },
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      height: 70,
+                      width: 70,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 6,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 4),
-                      Text(
-                        item["label"],
-                        style: const TextStyle(fontSize: 12),
-                        textAlign: TextAlign.center,
+                      child: Icon(
+                        item["icon"],
+                        color: Colors.black87,
+                        size: 28,
                       ),
-                    ],
-                  ),
-                )
-                .toList(),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      item["label"],
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black87,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ],
       ),

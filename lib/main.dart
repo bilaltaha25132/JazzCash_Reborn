@@ -4,9 +4,6 @@ import 'package:fintech_ui_tutorial/pages/my_card.dart';
 import 'package:fintech_ui_tutorial/pages/profile.dart';
 import 'package:fintech_ui_tutorial/pages/scan.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
-import 'widgets/credit_card.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,33 +14,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GoRouter router = GoRouter(
-      initialLocation: '/', 
-      routes: [
-        GoRoute(
-          path: '/',
-          builder: (BuildContext context, GoRouterState state) {
-            return const MainPage(); // Define the initial screen (MainPage)
-          },
-        ),
-        GoRoute(
-          path: 'profile_page', 
-          builder: (BuildContext context, GoRouterState state) {
-            return const ProfilePage();
-          },
-        ),
-      ],
-    );
-
-    return MaterialApp.router(
+    return MaterialApp(
       title: 'Fintech App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(255, 16, 80, 98),
+          seedColor: const Color(0xFF800000),
         ),
         useMaterial3: true,
       ),
-      routerConfig: router, // This is the correct property to use with GoRouter
+      home: const MainPage(),
     );
   }
 }
@@ -58,6 +38,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
 
+  // Define pages for navigation
   final List<Widget> pages = [
     const Home(),
     const MyCardPage(),
@@ -69,7 +50,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[currentIndex],
+      body: pages[currentIndex], // Show the selected page
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
         child: Row(
@@ -79,7 +60,7 @@ class _MainPageState extends State<MainPage> {
             tabItem(Icons.credit_card, "My Card", 1),
             FloatingActionButton(
               onPressed: () => onTabTapped(2),
-              backgroundColor: const Color.fromARGB(255, 16, 80, 98),
+              backgroundColor: Colors.black,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
@@ -98,7 +79,9 @@ class _MainPageState extends State<MainPage> {
 
   Widget tabItem(IconData icon, String label, int index) {
     return IconButton(
-      onPressed: () => onTabTapped(index),
+      onPressed: () {
+        onTabTapped(index); // Change the selected tab
+      },
       icon: Column(
         children: [
           Icon(
@@ -110,7 +93,7 @@ class _MainPageState extends State<MainPage> {
             style: TextStyle(
               fontSize: 10,
               color: currentIndex == index
-                  ? Theme.of(context).primaryColor
+                  ? Colors.black
                   : Colors.grey,
             ),
           ),
@@ -119,6 +102,7 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  // Update the current index for navigation
   void onTabTapped(int index) {
     setState(() {
       currentIndex = index;

@@ -1,3 +1,4 @@
+import 'package:fintech_ui_tutorial/pages/transfer_details_page.dart';
 import 'package:flutter/material.dart';
 
 class BankListPage extends StatelessWidget {
@@ -13,15 +14,19 @@ class BankListPage extends StatelessWidget {
       {"name": "Askari Bank", "logo": "assets/img_5.png"},
       {"name": "Bank Al-Habib", "logo": "assets/img_6.png"},
       {"name": "Bank Alfalah", "logo": "assets/img_7.png"},
-      // Add all remaining banks here
+      {"name": "Sadapay", "logo": "assets/img_13.png"},
+      {"name": "Nayapay", "logo": "assets/img_14.png"},
+      {"name": "Soneri Bank", "logo": "assets/img_15.png"},
+      {"name": "UBL", "logo": "assets/img_16.png"},
+      {"name": "Faysal Bank", "logo": "assets/img_17.png"},
+      {"name": "Habib Metro", "logo": "assets/img_18.png"},
     ];
 
     return Scaffold(
       appBar: AppBar(
         title: const Text("Send Money"),
         centerTitle: true,
-        backgroundColor:
-            const Color.fromARGB(255, 16, 80, 98), // Match app's teal color
+        backgroundColor: const Color(0xFF800000),
         foregroundColor: Colors.white,
       ),
       body: Column(
@@ -35,11 +40,10 @@ class BankListPage extends StatelessWidget {
                 hintText: 'Search (e.g. bank name)',
                 hintStyle: const TextStyle(color: Colors.grey),
                 filled: true,
-                fillColor: const Color.fromARGB(
-                    255, 239, 243, 245), // Light gray background
+                fillColor: const Color.fromARGB(255, 239, 243, 245),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide.none, // No border
+                  borderSide: BorderSide.none,
                 ),
               ),
             ),
@@ -52,13 +56,13 @@ class BankListPage extends StatelessWidget {
                 final bank = banks[index];
                 return Container(
                   margin:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                  const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                   decoration: BoxDecoration(
-                    color: Colors.white, // White card background
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.1), // Subtle shadow
+                        color: Colors.grey.withOpacity(0.1),
                         blurRadius: 5,
                         offset: const Offset(0, 3),
                       ),
@@ -67,20 +71,28 @@ class BankListPage extends StatelessWidget {
                   child: ListTile(
                     leading: CircleAvatar(
                       backgroundImage:
-                          AssetImage(bank["logo"]!), // Use bank logo
+                      AssetImage(bank["logo"]!), // Use bank logo
                       radius: 25,
                       backgroundColor: Colors.grey[200],
                     ),
                     title: Text(
                       bank["name"]!,
                       style: const TextStyle(
-                        color: Color.fromARGB(
-                            255, 16, 80, 98), // Match app's teal color
+                        color: Colors.black,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     onTap: () {
-                      // Implement functionality when a bank is selected
+                      // Navigate to the TransferDetailsPage with bank details
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TransferDetailsPage(
+                            bankName: bank["name"]!,
+                            bankLogo: bank["logo"]!,
+                          ),
+                        ),
+                      );
                     },
                   ),
                 );

@@ -1,5 +1,5 @@
-import 'package:fintech_ui_tutorial/widgets/credit_card.dart';
 import 'package:flutter/material.dart';
+
 
 class MyCardPage extends StatelessWidget {
   const MyCardPage({super.key});
@@ -9,17 +9,12 @@ class MyCardPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton.outlined(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            size: 20,
-          ),
-        ),
+        centerTitle: true,
+        backgroundColor: const Color(0xFF800000),
+        elevation: 0,
         title: const Text(
           "My Card",
-          style: TextStyle(fontWeight: FontWeight.w500),
+          style: TextStyle(fontWeight: FontWeight.w500, color: Colors.white)
         ),
       ),
       body: SingleChildScrollView(
@@ -49,8 +44,8 @@ class MyCardPage extends StatelessWidget {
                     fixedSize: const Size(double.maxFinite, 55),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12)),
-                    backgroundColor: Colors.grey[100],
-                    foregroundColor: Colors.black),
+                    backgroundColor: const Color(0xFF800000),
+                    foregroundColor: Colors.white),
               )
             ],
           ),
@@ -60,121 +55,152 @@ class MyCardPage extends StatelessWidget {
   }
 }
 
-class FrontCard extends StatelessWidget {
+class FrontCard extends StatefulWidget {
   const FrontCard({super.key});
+
+  @override
+  State<FrontCard> createState() => _FrontCardState();
+}
+
+class _FrontCardState extends State<FrontCard> {
+  bool isVisible = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 240,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Column(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Container(
-                  color: Colors.grey[900],
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        top: 16,
-                        left: 16,
-                        child: Image.asset(
-                          "assets/jazzcash_logo.png",
-                          height: 40,
-                        ),
+      height: 240,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Container(
+                color: Colors.grey[900],
+                child: Stack(
+                  children: [
+                    Positioned(
+                      top: 16,
+                      left: 16,
+                      child: Image.asset(
+                        "assets/jazzcash_logo.png",
+                        height: 40,
                       ),
-                      Positioned(
-                        top: 70,
-                        left: 16,
-                        child: Image.asset(
-                          "assets/credit-card.png",
-                          height: 30,
-                          color: Colors.white,
-                        ),
+                    ),
+                    Positioned(
+                      top: 70,
+                      left: 16,
+                      child: Image.asset(
+                        "assets/credit-card.png",
+                        height: 30,
+                        color: Colors.white,
                       ),
-                      Positioned(
-                        top: 60,
-                        left: 260,
-                        child: Image.asset(
-                          "assets/wifi.png",
-                          height: 50,
-                          color: Colors.white,
-                        ),
+                    ),
+                    Positioned(
+                      top: 60,
+                      left: 260,
+                      child: Image.asset(
+                        "assets/wifi.png",
+                        height: 50,
+                        color: Colors.white,
                       ),
-                      const Positioned(
-                        bottom: 16,
-                        left: 16,
-                        child: Text(
-                          "**** **** **** 1990",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 16,
+                      child: Row(
+                        children: [
+                          Text(
+                            isVisible ? "4590 2162 3897 1990": "**** **** **** 1990",
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
                           ),
-                        ),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isVisible = !isVisible; // Toggle the visibility
+                              });
+                            },
+                            icon: Icon(
+                              isVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off, // Change the icon dynamically
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                color: Colors.grey[900],
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Muhammad Bilal Taha',
+                            style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          Text(
+                            '9/23',
+                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CircleAvatar(
+                            radius: 15,
+                            backgroundColor: Colors.red.withOpacity(0.8),
+                          ),
+                          Transform.translate(
+                            offset: const Offset(-10, 0),
+                            child: CircleAvatar(
+                              radius: 15,
+                              backgroundColor: Colors.orange.withOpacity(0.8),
+                            ),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 ),
               ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  color: Colors.grey[900],
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Anabella Angela',
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            Text(
-                              '9/23',
-                              style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              radius: 15,
-                              backgroundColor: Colors.red.withOpacity(0.8),
-                            ),
-                            Transform.translate(
-                              offset: const Offset(-10, 0),
-                              child: CircleAvatar(
-                                radius: 15,
-                                backgroundColor: Colors.orange.withOpacity(0.8),
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ));
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 
-class BackCard extends StatelessWidget {
+class BackCard extends StatefulWidget {
   const BackCard({super.key});
+
+  @override
+  State<BackCard> createState() => _BackCardState();
+}
+
+class _BackCardState extends State<BackCard> {
+  bool isVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -185,16 +211,6 @@ class BackCard extends StatelessWidget {
           color: Colors.grey[900]),
       child: Stack(
         children: [
-          Positioned(
-            right: 0,
-            top: 0,
-            bottom: 0,
-            child: Image.asset(
-              "assets/card-design.png",
-              fit: BoxFit.cover,
-              width: 160,
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -221,17 +237,34 @@ class BackCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "**** **** **** 1990",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          isVisible ? "4590 2162 3897 1990": "**** **** **** 1990",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isVisible = !isVisible; // Toggle the visibility
+                            });
+                          },
+                          icon: Icon(
+                            isVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off, // Change the icon dynamically
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
+                    const Text(
                       "9/23",
                       style: TextStyle(
                         color: Colors.grey,
@@ -241,7 +274,7 @@ class BackCard extends StatelessWidget {
                   ],
                 ),
                 const Text(
-                  "Anabella Angela",
+                  "Muhammad Bilal Taha",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 17,

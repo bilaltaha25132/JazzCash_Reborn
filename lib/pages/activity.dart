@@ -11,27 +11,15 @@ class ActivityPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton.outlined(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-          ),
-        ),
+        centerTitle: true,
+        backgroundColor: const Color(0xFF800000),
         title: const Text(
           "Activity",
           style: TextStyle(
             fontWeight: FontWeight.w500,
+              color: Colors.white
           ),
         ),
-        actions: [
-          IconButton.outlined(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.more_horiz,
-            ),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -46,12 +34,10 @@ class ActivityPage extends StatelessWidget {
                     (index) => Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        width: 340,
+                        width: 305,
                         height: 75,
                         decoration: BoxDecoration(
-                          color: (index % 2 == 0)
-                              ? const Color.fromARGB(255, 16, 80, 98)
-                              : Colors.black,
+                          color: Colors.grey[900],
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Padding(
@@ -81,14 +67,14 @@ class ActivityPage extends StatelessWidget {
                                     CircleAvatar(
                                       radius: 15,
                                       backgroundColor:
-                                          Colors.white.withOpacity(0.8),
+                                          Colors.red.withOpacity(0.8),
                                     ),
                                     Transform.translate(
                                       offset: const Offset(-10, 0),
                                       child: CircleAvatar(
                                         radius: 15,
                                         backgroundColor:
-                                            Colors.white.withOpacity(0.8),
+                                            Colors.orange.withOpacity(0.8),
                                       ),
                                     )
                                   ],
@@ -104,11 +90,11 @@ class ActivityPage extends StatelessWidget {
               ),
               const SizedBox(height: 25),
               Container(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 width: double.maxFinite,
                 height: 350,
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[300]!),
+                  border: Border.all(color: Colors.black),
                   borderRadius: BorderRadius.circular(17),
                 ),
                 child: Column(
@@ -118,12 +104,12 @@ class ActivityPage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: Colors.grey,
+                        color: Colors.black,
                       ),
                     ),
                     const SizedBox(height: 4),
                     const Text(
-                      "\$6,345.00",
+                      "\Rs.6,345.00",
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -135,9 +121,9 @@ class ActivityPage extends StatelessWidget {
                     Expanded(
                       child: LineChart(
                         LineChartData(
-                          gridData: FlGridData(show: false),
+                          gridData: const FlGridData(show: false),
                           titlesData: FlTitlesData(
-                            leftTitles: AxisTitles(
+                            leftTitles: const AxisTitles(
                               sideTitles: SideTitles(showTitles: false),
                             ),
                             bottomTitles: AxisTitles(
@@ -157,7 +143,7 @@ class ActivityPage extends StatelessWidget {
                                       return Text(
                                         tiles[index],
                                         style:
-                                            const TextStyle(color: Colors.grey),
+                                            const TextStyle(color: Colors.black),
                                       );
                                     }
                                     return const Text("");
@@ -219,7 +205,7 @@ class ActivityPage extends StatelessWidget {
                       ),
                       Icon(
                         Icons.keyboard_arrow_down,
-                        color: Colors.teal,
+                        color: Colors.black,
                       )
                     ],
                   ),
@@ -233,7 +219,7 @@ class ActivityPage extends StatelessWidget {
                       backgroundColor: Color.fromARGB(255, 239, 243, 245),
                       child: Icon(
                         Icons.payments_rounded,
-                        color: Colors.blue,
+                        color: Colors.black,
                       ),
                     ),
                     title: Text(
@@ -244,7 +230,7 @@ class ActivityPage extends StatelessWidget {
                     ),
                     subtitle: Text("ui8.net"),
                     trailing: Text(
-                      "-\$45.99",
+                      "-\Rs.45.99",
                       style:
                           TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                     ),

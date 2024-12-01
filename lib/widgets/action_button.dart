@@ -16,7 +16,7 @@ class ActionButtons extends StatelessWidget {
         alignment: Alignment.center,
         height: 100,
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 239, 243, 245),
+          color: Colors.grey[200],
           borderRadius: BorderRadius.circular(15),
         ),
         child: Row(
@@ -89,7 +89,7 @@ class ActionButton extends StatelessWidget {
           onPressed: onPressed,
           icon: Icon(
             icon,
-            color: const Color.fromARGB(255, 16, 80, 98), // App's teal color
+            color: Colors.black, // App's teal color
           ),
         ),
         const SizedBox(height: 8),
