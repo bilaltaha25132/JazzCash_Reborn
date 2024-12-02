@@ -10,8 +10,8 @@ class MorePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("More"),
         centerTitle: true,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: const Color(0xFF800000),
+        foregroundColor: Colors.white,
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -111,8 +111,7 @@ class MorePage extends StatelessWidget {
             itemBuilder: (context, index) {
               final item = items[index];
               return GestureDetector(
-                onTap: () {
-                },
+                onTap: () {},
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [

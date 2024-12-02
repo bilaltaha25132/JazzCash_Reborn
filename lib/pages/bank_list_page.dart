@@ -1,11 +1,22 @@
 import 'package:fintech_ui_tutorial/pages/transfer_details_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart'; // Import flutter_tts package
 
 class BankListPage extends StatelessWidget {
   const BankListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Initialize FlutterTts
+    final FlutterTts flutterTts = FlutterTts();
+
+    // Function to speak bank name
+    Future<void> _speakBankName(String bankName) async {
+      await flutterTts.setLanguage("en-US"); // Set language to English
+      await flutterTts.setSpeechRate(0.5); // Adjust speech rate (optional)
+      await flutterTts.speak(bankName); // Speak the bank name
+    }
+
     final banks = [
       {"name": "Meezan Bank", "logo": "assets/img_1.png"},
       {"name": "APNA Microfinance", "logo": "assets/img_2.png"},
@@ -56,7 +67,7 @@ class BankListPage extends StatelessWidget {
                 final bank = banks[index];
                 return Container(
                   margin:
-                  const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -71,7 +82,7 @@ class BankListPage extends StatelessWidget {
                   child: ListTile(
                     leading: CircleAvatar(
                       backgroundImage:
-                      AssetImage(bank["logo"]!), // Use bank logo
+                          AssetImage(bank["logo"]!), // Use bank logo
                       radius: 25,
                       backgroundColor: Colors.grey[200],
                     ),
@@ -83,6 +94,9 @@ class BankListPage extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
+                      // Speak the bank name
+                      _speakBankName(bank["name"]!);
+
                       // Navigate to the TransferDetailsPage with bank details
                       Navigator.push(
                         context,
