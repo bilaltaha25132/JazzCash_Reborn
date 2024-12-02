@@ -27,13 +27,14 @@ class Home extends StatelessWidget {
                     children: [
                       Text(
                         isUrdu ? "خوش آمدید!" : "Welcome back!",
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: Colors.white, fontSize: isUrdu ? 18 : 15),
                       ),
                       Text(
                         isUrdu ? "محمد بلال طہ" : "Muhammad Bilal Taha",
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
-                          fontSize: 24,
+                          fontSize: isUrdu ? 28 : 24,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

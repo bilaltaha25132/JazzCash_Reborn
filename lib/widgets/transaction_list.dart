@@ -18,13 +18,19 @@ class TransactionList extends StatelessWidget {
               children: [
                 Text(
                   isUrdu ? "آج، 29 دسمبر" : "Today, Dec 29",
-                  style: const TextStyle(color: Colors.black),
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: isUrdu ? 18 : 15,
+                  ),
                 ),
                 Row(
                   children: [
                     Text(
                       isUrdu ? "تمام لین دین" : "All Transactions",
-                      style: const TextStyle(color: Colors.black),
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: isUrdu ? 18 : 15,
+                      ),
                     ),
                   ],
                 ),
@@ -39,8 +45,18 @@ class TransactionList extends StatelessWidget {
                 color: Colors.purpleAccent,
               ),
             ),
-            title: Text(isUrdu ? "جم" : "Gym"),
-            subtitle: Text(isUrdu ? "ادائیگی" : "Payment"),
+            title: Text(
+              isUrdu ? "جم" : "Gym",
+              style: TextStyle(
+                  fontSize: isUrdu ? 18 : 16,
+                  fontWeight: isUrdu ? FontWeight.bold : FontWeight.normal),
+            ),
+            subtitle: Text(
+              isUrdu ? "ادائیگی" : "Payment",
+              style: TextStyle(
+                fontSize: isUrdu ? 18 : 15,
+              ),
+            ),
             trailing: Text(
               isUrdu ? "-\Rs.45.99" : "-\Rs.45.99",
               style: const TextStyle(color: Colors.red),
@@ -57,8 +73,18 @@ class TransactionList extends StatelessWidget {
                 color: Colors.teal,
               ),
             ),
-            title: Text(isUrdu ? "بینک آف پنجاب" : "Bank of Punjab"),
-            subtitle: Text(isUrdu ? "جمع" : "Deposit"),
+            title: Text(
+              isUrdu ? "بینک آف پنجاب" : "Bank of Punjab",
+              style: TextStyle(
+                  fontSize: isUrdu ? 18 : 16,
+                  fontWeight: isUrdu ? FontWeight.bold : FontWeight.normal),
+            ),
+            subtitle: Text(
+              isUrdu ? "جمع" : "Deposit",
+              style: TextStyle(
+                fontSize: isUrdu ? 18 : 15,
+              ),
+            ),
             trailing: Text(
               isUrdu ? "+\Rs.1,328.00" : "+\Rs.1,328.00",
               style: const TextStyle(color: Colors.teal),
@@ -75,8 +101,18 @@ class TransactionList extends StatelessWidget {
                 color: Colors.orangeAccent,
               ),
             ),
-            title: Text(isUrdu ? "معاذ عارف کو" : "To Muaz Arif"),
-            subtitle: Text(isUrdu ? "بھیجا گیا" : "Sent"),
+            title: Text(
+              isUrdu ? "معاذ عارف کو" : "To Muaz Arif",
+              style: TextStyle(
+                  fontSize: isUrdu ? 18 : 16,
+                  fontWeight: isUrdu ? FontWeight.bold : FontWeight.normal),
+            ),
+            subtitle: Text(
+              isUrdu ? "بھیجا گیا" : "Sent",
+              style: TextStyle(
+                fontSize: isUrdu ? 18 : 15,
+              ),
+            ),
             trailing: Text(
               isUrdu ? "-\Rs.699.00" : "-\Rs.699.00",
               style: const TextStyle(color: Colors.red),

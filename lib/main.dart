@@ -69,7 +69,8 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         title: Text(
           isUrdu ? "جاز کیش ریبورن" : "JazzCash Reborn",
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: isUrdu ? 26 : 26),
         ),
         centerTitle: true,
         backgroundColor: const Color(0xFF800000),
@@ -112,26 +113,38 @@ class _MainPageState extends State<MainPage> {
       ),
       body: pages[currentIndex], // Show the selected page
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            tabItem(Icons.home, isUrdu ? "ہوم" : "Home", 0),
-            tabItem(Icons.credit_card, isUrdu ? "میرا کارڈ" : "My Card", 1),
-            FloatingActionButton(
-              onPressed: () => onTabTapped(2),
-              backgroundColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: const Icon(
-                Icons.qr_code_scanner,
-                color: Colors.white,
+        height: 90,
+        color: Colors.grey[100],
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.grey[100], // Background color of the container
+            border: Border(
+              top: BorderSide(
+                color: Colors.grey[100]!, // Grey border color
+                width: 2.0, // Border width
               ),
             ),
-            tabItem(Icons.bar_chart, isUrdu ? "سرگرمی" : "Activity", 3),
-            tabItem(Icons.person, isUrdu ? "پروفائل" : "Profile", 4),
-          ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              tabItem(Icons.home, isUrdu ? "ہوم" : "Home", 0),
+              tabItem(Icons.credit_card, isUrdu ? "میرا کارڈ" : "My Card", 1),
+              FloatingActionButton(
+                onPressed: () => onTabTapped(2),
+                backgroundColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: const Icon(
+                  Icons.qr_code_scanner,
+                  color: Colors.white,
+                ),
+              ),
+              tabItem(Icons.bar_chart, isUrdu ? "سرگرمی" : "Activity", 3),
+              tabItem(Icons.person, isUrdu ? "پروفائل" : "Profile", 4),
+            ],
+          ),
         ),
       ),
     );
@@ -151,7 +164,8 @@ class _MainPageState extends State<MainPage> {
           Text(
             label,
             style: TextStyle(
-              fontSize: 10,
+              fontSize: isUrdu ? 15 : 10,
+              fontWeight: isUrdu ? FontWeight.bold : FontWeight.normal,
               color: currentIndex == index ? Colors.black : Colors.grey,
             ),
           ),

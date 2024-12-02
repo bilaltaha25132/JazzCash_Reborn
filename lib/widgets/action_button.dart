@@ -128,7 +128,9 @@ class ActionButton extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           label,
-          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+          style: TextStyle(
+              fontSize: isUrdu ? 15 : 12,
+              fontWeight: isUrdu ? FontWeight.bold : FontWeight.w500),
         ),
       ],
     );

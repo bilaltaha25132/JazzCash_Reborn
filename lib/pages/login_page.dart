@@ -55,21 +55,34 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 25),
+                const SizedBox(height: 55),
                 // JazzCash Logo (Diagonally Positioned)
-                Transform.rotate(
-                  angle: -0.3, // Rotate logo diagonally (in radians)
-                  child: ClipRect(
-                    child: SizedBox(
-                      width: 280, // Image width
-                      height: 250, // Image height
+                Container(
+                  width:
+                      250, // Slightly larger than the CircleAvatar's diameter
+                  height:
+                      250, // Slightly larger than the CircleAvatar's diameter
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.white, // White border
+                      width: 4.0, // Thickness of the border
+                    ),
+                  ),
+                  child: CircleAvatar(
+                    radius: 120,
+                    backgroundColor: Colors.grey[900],
+                    child: ClipRect(
+                      // Clip the image to ensure it's circular
                       child: Image.asset(
-                        'assets/jazzcash_logo.png',
+                        'assets/jazzcash_reborn_logo.jpeg',
+                        width: 210,
                         fit: BoxFit.contain,
                       ),
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 30),
                 // Dynamic Welcome Text
                 Text(

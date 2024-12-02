@@ -52,9 +52,9 @@ class CreditCard extends StatelessWidget {
                         left: 16,
                         child: Text(
                           isUrdu ? "محمد بلال طحہ" : "Muhammad Bilal Taha",
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
-                            fontSize: 18,
+                            fontSize: isUrdu ? 24 : 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -73,7 +73,7 @@ class CreditCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          isUrdu ? 'روپے۔ 10,250.00' : '\Rs. 10,250.00',
+                          isUrdu ? 'Rs. 10,250.00' : '\Rs. 10,250.00',
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
